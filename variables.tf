@@ -111,7 +111,7 @@ variable "bucket_key_enabled" {
 variable "bucket_logging" {
   type = object({
     target_bucket = optional(string, "")
-    target_prefix = optional(string)
+    target_prefix = optional(string, "")
     target_object_key_format = optional(object({
       partitioned_prefix = optional(object({
         partition_date_source = string
