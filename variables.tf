@@ -102,6 +102,12 @@ variable "bucket_versioning" {
   description = "Enable bucket versioning or not"
 }
 
+variable "bucket_key_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS"
+}
+
 variable "cidrs" {
   type        = list(string)
   description = "List of CIDRs that can access the bastion. Default: 0.0.0.0/0"
