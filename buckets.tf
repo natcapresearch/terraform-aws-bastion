@@ -16,6 +16,34 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
   }
 }
 
+resource "aws_s3_bucket_logging" "bucket" {
+  count         = var.bucket_logging["target_bucket"] != "" ? 1 : 0
+  bucket        = aws_s3_bucket.bucket.id
+  target_bucket = var.bucket_logging["target_bucket"]
+  target_prefix = try(var.bucket_logging["target_prefix"], null)
+
+  dynamic "target_object_key_format" {
+    for_each = try([var.bucket_logging["target_object_key_format"]], [])
+
+    content {
+      dynamic "partitioned_prefix" {
+        for_each = target_object_key_format.value["partitioned_prefix"] != null ? [target_object_key_format.value["partitioned_prefix"]] : []
+
+        content {
+          partition_date_source = partitioned_prefix.value["partition_date_source"]
+        }
+      }
+
+      dynamic "simple_prefix" {
+        for_each = target_object_key_format.value["simple_prefix"] ? [true] : []
+
+        content {}
+      }
+    }
+  }
+
+}
+
 resource "aws_s3_bucket_acl" "bucket" {
   bucket = aws_s3_bucket.bucket.id
   acl    = "private"

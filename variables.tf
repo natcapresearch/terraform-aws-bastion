@@ -108,6 +108,21 @@ variable "bucket_key_enabled" {
   description = "Whether or not to use Amazon S3 Bucket Keys for SSE-KMS"
 }
 
+variable "bucket_logging" {
+  type = object({
+    target_bucket = optional(string, "")
+    target_prefix = optional(string)
+    target_object_key_format = optional(object({
+      partitioned_prefix = optional(object({
+        partition_date_source = string
+      }))
+      simple_prefix = optional(bool, false)
+    }))
+  })
+  default     = {}
+  description = "Map containing access bucket logging configuration"
+}
+
 variable "cidrs" {
   type        = list(string)
   description = "List of CIDRs that can access the bastion. Default: 0.0.0.0/0"
