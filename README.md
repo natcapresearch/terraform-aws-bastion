@@ -139,6 +139,7 @@ No modules.
 | <a name="input_bastion_record_name"></a> [bastion\_record\_name](#input\_bastion\_record\_name) | DNS record name to use for the bastion | `string` | `""` | no |
 | <a name="input_bastion_security_group_id"></a> [bastion\_security\_group\_id](#input\_bastion\_security\_group\_id) | Custom security group to use | `string` | `""` | no |
 | <a name="input_bucket_force_destroy"></a> [bucket\_force\_destroy](#input\_bucket\_force\_destroy) | The bucket and all objects should be destroyed when using true | `bool` | `false` | no |
+| <a name="input_bucket_key_enabled"></a> [bucket\_key\_enabled](#input\_bucket\_key\_enabled) | Whether or not to use Amazon S3 Bucket Keys for SSE-KMS | `bool` | `false` | no |
 | <a name="input_bucket_name"></a> [bucket\_name](#input\_bucket\_name) | Bucket name where the bastion will store the logs | `string` | n/a | yes |
 | <a name="input_bucket_versioning"></a> [bucket\_versioning](#input\_bucket\_versioning) | Enable bucket versioning or not | `bool` | `true` | no |
 | <a name="input_cidrs"></a> [cidrs](#input\_cidrs) | List of CIDRs that can access the bastion. Default: 0.0.0.0/0 | `list(string)` | <pre>[<br/>  "0.0.0.0/0"<br/>]</pre> | no |
