@@ -339,3 +339,9 @@ variable "use_target_group_name_prefix" {
   type        = bool
   default     = false
 }
+
+variable "max_instance_lifetime" {
+  type        = number
+  default     = 0
+  description = "Maximum instance lifetime in seconds. 0 means no limit."
+}
