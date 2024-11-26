@@ -166,6 +166,7 @@ No modules.
 | <a name="input_log_expiry_days"></a> [log\_expiry\_days](#input\_log\_expiry\_days) | Number of days before logs expiration | `number` | `90` | no |
 | <a name="input_log_glacier_days"></a> [log\_glacier\_days](#input\_log\_glacier\_days) | Number of days before moving logs to Glacier | `number` | `60` | no |
 | <a name="input_log_standard_ia_days"></a> [log\_standard\_ia\_days](#input\_log\_standard\_ia\_days) | Number of days before moving logs to IA Storage | `number` | `30` | no |
+| <a name="input_max_instance_lifetime"></a> [max\_instance\_lifetime](#input\_max\_instance\_lifetime) | Maximum instance lifetime in seconds. 0 means no limit. | `number` | `0` | no |
 | <a name="input_private_ssh_port"></a> [private\_ssh\_port](#input\_private\_ssh\_port) | Set the SSH port to use between the bastion and private instance | `number` | `22` | no |
 | <a name="input_public_ssh_port"></a> [public\_ssh\_port](#input\_public\_ssh\_port) | Set the SSH port to use from desktop to the bastion | `number` | `22` | no |
 | <a name="input_region"></a> [region](#input\_region) | n/a | `string` | n/a | yes |

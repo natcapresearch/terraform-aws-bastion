@@ -359,6 +359,17 @@ resource "aws_autoscaling_group" "bastion_auto_scaling_group" {
   min_size         = var.bastion_instance_count
   desired_capacity = var.bastion_instance_count
 
+  max_instance_lifetime = var.max_instance_lifetime
+
+  dynamic "instance_maintenance_policy" {
+    for_each = var.max_instance_lifetime > 0 ? [true] : []
+    content {
+      min_healthy_percentage = 100
+      max_healthy_percentage = 100
+    }
+
+  }
+
   vpc_zone_identifier = var.auto_scaling_group_subnets
 
   default_cooldown          = 180
