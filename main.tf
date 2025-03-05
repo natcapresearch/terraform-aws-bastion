@@ -29,7 +29,7 @@ resource "aws_security_group" "lb_security_group" {
 }
 
 resource "aws_security_group_rule" "ingress_lb" {
-  count            = var.lb_with_security_group ? 1 : 0
+  count            = (length(var.cidrs) > 0 || length(var.ipv6_cidrs) > 0) && var.lb_with_security_group ? 1 : 0
   description      = "Incoming traffic to bastion lb"
   type             = "ingress"
   from_port        = var.public_ssh_port
