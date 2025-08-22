@@ -277,6 +277,12 @@ variable "tags" {
   description = "A mapping of tags to assign"
 }
 
+variable "asg_tags" {
+  type        = map(string)
+  default     = {}
+  description = "A mapping of tags to assign to the ASG"
+}
+
 variable "use_imds_v2" {
   type        = bool
   description = "Use (IMDSv2) Instance Metadata Service V2"

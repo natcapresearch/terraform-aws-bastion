@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 1.0"
+}
+
 module "bastion" {
   source                  = "../"
   bucket_name             = "my_famous_bucket_name"
