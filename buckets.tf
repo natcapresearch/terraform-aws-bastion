@@ -1,3 +1,8 @@
+locals {
+  resolved_target_bucket = try(var.bucket_logging["target_bucket"], "")
+  enable_logging         = local.resolved_target_bucket != null && local.resolved_target_bucket != ""
+}
+
 resource "aws_s3_bucket" "bucket" {
   bucket        = var.bucket_name
   force_destroy = var.bucket_force_destroy
@@ -17,13 +22,12 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket" {
 }
 
 resource "aws_s3_bucket_logging" "bucket" {
-  count         = var.bucket_logging["target_bucket"] != "" ? 1 : 0
   bucket        = aws_s3_bucket.bucket.id
-  target_bucket = var.bucket_logging["target_bucket"]
+  target_bucket = local.resolved_target_bucket
   target_prefix = try(var.bucket_logging["target_prefix"], null)
 
   dynamic "target_object_key_format" {
-    for_each = try([var.bucket_logging["target_object_key_format"]], [])
+    for_each = local.resolved_target_bucket != "" ? [var.bucket_logging["target_object_key_format"]] : []
 
     content {
       dynamic "partitioned_prefix" {
@@ -41,7 +45,6 @@ resource "aws_s3_bucket_logging" "bucket" {
       }
     }
   }
-
 }
 
 resource "aws_s3_bucket_acl" "bucket" {
