@@ -1,6 +1,5 @@
 locals {
   resolved_target_bucket = try(var.bucket_logging["target_bucket"], "")
-  enable_logging         = local.resolved_target_bucket != null && local.resolved_target_bucket != ""
 }
 
 resource "aws_s3_bucket" "bucket" {
