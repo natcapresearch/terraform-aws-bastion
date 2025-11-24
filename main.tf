@@ -176,6 +176,18 @@ data "aws_iam_policy_document" "bastion_host_policy_document" {
     resources = ["${aws_s3_bucket.bucket.arn}/public-keys/*"]
   }
 
+  dynamic "statement" {
+    for_each = var.bucket_packagedir.enable && var.bucket_packagedir.prefix != "" ? [1] : []
+
+    content {
+      actions = [
+        "s3:GetObject"
+      ]
+
+      resources = ["${aws_s3_bucket.bucket.arn}/${var.bucket_packagedir.prefix}*"]
+    }
+  }
+
   statement {
     actions = [
       "s3:ListBucket"

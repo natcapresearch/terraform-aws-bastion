@@ -123,6 +123,15 @@ variable "bucket_logging" {
   description = "Map containing access bucket logging configuration"
 }
 
+variable "bucket_packagedir" {
+  type = object({
+    enable = optional(bool, false)
+    prefix = optional(string, "packages/")
+  })
+  default     = {}
+  description = "Whether to enable a package directory in the bastion S3 bucket"
+}
+
 variable "cidrs" {
   type        = list(string)
   description = "List of CIDRs that can access the bastion. Default: 0.0.0.0/0"
